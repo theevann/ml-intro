@@ -64,7 +64,7 @@ class: center, middle
 - .grey[Introduction: Deep Learning - Pourquoi et où ?]
 - Réseau de neurones: Description et entraînements
 - .grey[Vision: Introduction aux réseaux neuronnaux convolutionnels]
-- .grey[Le deep éthique]    
+- .grey[Le deep learning: limite et éthique]    
 
 ### .grey[En pratique...]
 
@@ -74,25 +74,44 @@ class: center, middle
 
 ---
 ## Notations
-- Un réseau de neurones correspond à une fonction f qui a des paramètres ajustables $W$:
+
+- Un réseau de neurones correspond à une fonction $f$ qui a des paramètres ajustables $W$:
 
 $$
-\mathbf{f}(\cdot; W): \mathbb{R}^N \rightarrow (0, 1)^K
+f( \boldsymbol{x} ,  W): \boldsymbol{x} \in \mathbb{R}^N \Longrightarrow f(\boldsymbol{x}) \in (0, 1)^K
 $$
 
 --
 
-- Pour $s$ un élément du dataset $S$:
-  
-    - entrée: $\mathbf{x}^s \in \mathbb{R}^N$
-    - sortie attendue: $y^s \in [0, K-1]$
+<br>
 
+.center[
+<img src="images/example_nn.png" style="width: 85%;" />
+]
+
+
+---
+## Notations
+
+- Un réseau de neurones correspond à une fonction $f$ qui a des paramètres ajustables $W$:
+
+$$
+f( \boldsymbol{x} ,  W): \boldsymbol{x} \in \mathbb{R}^N \Longrightarrow f(\boldsymbol{x}) \in (0, 1)^K
+$$
+
+
+- Un élément du dataset $S$ est composé de :
+
+    - une entrée : $\boldsymbol{x} \in \mathbb{R}^N$
+    - la sortie attendue : $y \in [0, K-1]$
+    
 --
 
-- Probabilité: $\mathbf{f}(\mathbf{x}^s; W)_c = p(Y=c|X=\mathbf{x}^s)$
+- Probabilité que $\boldsymbol{x}$ appartient à la classe $c$ :
 
-
-.credit[Slide credit: C. Ollion & O. Grisel]
+$$
+f(\boldsymbol{x}; W)_c = p(Y=c|X=\boldsymbol{x})
+$$
 
 ---
 
@@ -117,7 +136,7 @@ $$
 --
 
 .center[
-$z(\mathbf{x}) = w_0 x_0 + w_1 x_1 + ... + w_n x_n + b = \mathbf{w}^T \mathbf{x} + b$
+$z(\boldsymbol{x}) = w_0 x_0 + w_1 x_1 + ... + w_n x_n + b = \boldsymbol{w}^T \boldsymbol{x} + b$
 
 ]
 
@@ -132,16 +151,16 @@ $z(\mathbf{x}) = w_0 x_0 + w_1 x_1 + ... + w_n x_n + b = \mathbf{w}^T \mathbf{x}
 .credit[Slide credit: C. Ollion & O. Grisel]
 
 .center[
-$z(\mathbf{x}) = w_0 x_0 + w_1 x_1 + ... + w_n x_n + b = \mathbf{w}^T \mathbf{x} + b$
+$z(\boldsymbol{x}) = w_0 x_0 + w_1 x_1 + ... + w_n x_n + b = \boldsymbol{w}^T \boldsymbol{x} + b$
 
-$f(\mathbf{x}) = g(z(\mathbf{x})) = g(\mathbf{w}^T \mathbf{x} + b)$
+$f(\boldsymbol{x}) = g(z(\boldsymbol{x})) = g(\boldsymbol{w}^T \boldsymbol{x} + b)$
 ]
 
 --
 
-- $\mathbf{x}, f(\mathbf{x}) \,\,$    Entrée et sortie
-- $z(\mathbf{x})\,\,\,$    Pré-activation
-- $\mathbf{w}, b\,\,$    Poids et biais
+- $\boldsymbol{x}, f(\boldsymbol{x}) \,\,$    Entrée et sortie
+- $z(\boldsymbol{x})\,\,\,$    Pré-activation
+- $\boldsymbol{w}, b\,\,$    Poids et biais
 - $g\,\,\,\,\,\,\,\,$  Fonction d'activation (non-linéarité)
 
 .credit[Slide credit: C. Ollion & O. Grisel]
@@ -175,13 +194,13 @@ $f(\mathbf{x}) = g(z(\mathbf{x})) = g(\mathbf{w}^T \mathbf{x} + b)$
 <img src="images/latex1.svg" style="width: 500px;" />
 ]
 .center[
-$\mathbf{z(x)} = \mathbf{W} \mathbf{x} + \mathbf{b}$
+$\mathbf{z(x)} = \boldsymbol{W} \boldsymbol{x} + \mathbf{b}$
 
-$\mathbf{f}(\mathbf{x}) = g(\mathbf{z(x)}) = g(\mathbf{W}  \mathbf{x} + \mathbf{b})$
+$\boldsymbol{f}(\boldsymbol{x}) = g(\mathbf{z(x)}) = g(\boldsymbol{W}  \boldsymbol{x} + \mathbf{b})$
 ]
 
 
-- $\mathbf{W}, \mathbf{b}\,\,$    now matrix and vector
+- $\boldsymbol{W}, \mathbf{b}\,\,$    sont maintenant une matrice et un vecteur
 
 .credit[Slide credit: C. Ollion & O. Grisel]
 ---
@@ -192,10 +211,10 @@ $\mathbf{f}(\mathbf{x}) = g(\mathbf{z(x)}) = g(\mathbf{W}  \mathbf{x} + \mathbf{
 ]
 
 <br/>
-- $\mathbf{z}^h(\mathbf{x}) = \mathbf{W}^h \mathbf{x} + \mathbf{b}^h$
-- <span style="color:#cccccc"> $\mathbf{h}(\mathbf{x}) = g(\mathbf{z}^h(\mathbf{x})) = g(\mathbf{W}^h \mathbf{x} + \mathbf{b}^h)$</span>
-- <span style="color:#cccccc"> $\mathbf{z}^o(\mathbf{x}) = \mathbf{W}^o \mathbf{h}(\mathbf{x}) + \mathbf{b}^o$</span>
-- <span style="color:#cccccc"> $\mathbf{f}(\mathbf{x}) = softmax(\mathbf{z}^o) = softmax(\mathbf{W}^o \mathbf{h}(\mathbf{x}) + \mathbf{b}^o)$</span>
+- $\mathbf{z}^h(\boldsymbol{x}) = \boldsymbol{W}^h \boldsymbol{x} + \mathbf{b}^h$
+- <span style="color:#cccccc"> $\mathbf{h}(\boldsymbol{x}) = g(\mathbf{z}^h(\boldsymbol{x})) = g(\boldsymbol{W}^h \boldsymbol{x} + \mathbf{b}^h)$</span>
+- <span style="color:#cccccc"> $\mathbf{z}^o(\boldsymbol{x}) = \boldsymbol{W}^o \mathbf{h}(\boldsymbol{x}) + \mathbf{b}^o$</span>
+- <span style="color:#cccccc"> $\boldsymbol{f}(\boldsymbol{x}) = softmax(\mathbf{z}^o) = softmax(\boldsymbol{W}^o \mathbf{h}(\boldsymbol{x}) + \mathbf{b}^o)$</span>
 
 .credit[Slide credit: C. Ollion & O. Grisel]
 
@@ -212,10 +231,10 @@ logistic regression is the same without the hidden layer
 ]
 
 <br/>
-- <span style="color:#cccccc"> $\mathbf{z}^h(\mathbf{x}) = \mathbf{W}^h \mathbf{x} + \mathbf{b}^h$</span>
-- $\mathbf{h}(\mathbf{x}) = g(\mathbf{z}^h(\mathbf{x})) = g(\mathbf{W}^h \mathbf{x} + \mathbf{b}^h)$
-- <span style="color:#cccccc"> $\mathbf{z}^o(\mathbf{x}) = \mathbf{W}^o \mathbf{h}(\mathbf{x}) + \mathbf{b}^o$</span>
-- <span style="color:#cccccc"> $\mathbf{f}(\mathbf{x}) = softmax(\mathbf{z}^o) = softmax(\mathbf{W}^o \mathbf{h}(\mathbf{x}) + \mathbf{b}^o)$</span>
+- <span style="color:#cccccc"> $\mathbf{z}^h(\boldsymbol{x}) = \boldsymbol{W}^h \boldsymbol{x} + \mathbf{b}^h$</span>
+- $\mathbf{h}(\boldsymbol{x}) = g(\mathbf{z}^h(\boldsymbol{x})) = g(\boldsymbol{W}^h \boldsymbol{x} + \mathbf{b}^h)$
+- <span style="color:#cccccc"> $\mathbf{z}^o(\boldsymbol{x}) = \boldsymbol{W}^o \mathbf{h}(\boldsymbol{x}) + \mathbf{b}^o$</span>
+- <span style="color:#cccccc"> $\boldsymbol{f}(\boldsymbol{x}) = softmax(\mathbf{z}^o) = softmax(\boldsymbol{W}^o \mathbf{h}(\boldsymbol{x}) + \mathbf{b}^o)$</span>
 
 .credit[Slide credit: C. Ollion & O. Grisel]
 
@@ -227,10 +246,10 @@ logistic regression is the same without the hidden layer
 ]
 
 <br/>
-- <span style="color:#cccccc"> $\mathbf{z}^h(\mathbf{x}) = \mathbf{W}^h \mathbf{x} + \mathbf{b}^h$</span>
-- <span style="color:#cccccc"> $\mathbf{h}(\mathbf{x}) = g(\mathbf{z}^h(\mathbf{x})) = g(\mathbf{W}^h \mathbf{x} + \mathbf{b}^h)$</span>
-- $\mathbf{z}^o(\mathbf{x}) = \mathbf{W}^o \mathbf{h}(\mathbf{x}) + \mathbf{b}^o$
-- <span style="color:#cccccc"> $\mathbf{f}(\mathbf{x}) = softmax(\mathbf{z}^o) = softmax(\mathbf{W}^o \mathbf{h}(\mathbf{x}) + \mathbf{b}^o)$</span>
+- <span style="color:#cccccc"> $\mathbf{z}^h(\boldsymbol{x}) = \boldsymbol{W}^h \boldsymbol{x} + \mathbf{b}^h$</span>
+- <span style="color:#cccccc"> $\mathbf{h}(\boldsymbol{x}) = g(\mathbf{z}^h(\boldsymbol{x})) = g(\boldsymbol{W}^h \boldsymbol{x} + \mathbf{b}^h)$</span>
+- $\mathbf{z}^o(\boldsymbol{x}) = \boldsymbol{W}^o \mathbf{h}(\boldsymbol{x}) + \mathbf{b}^o$
+- <span style="color:#cccccc"> $\boldsymbol{f}(\boldsymbol{x}) = softmax(\mathbf{z}^o) = softmax(\boldsymbol{W}^o \mathbf{h}(\boldsymbol{x}) + \mathbf{b}^o)$</span>
 
 .credit[Slide credit: C. Ollion & O. Grisel]
 
@@ -242,19 +261,10 @@ logistic regression is the same without the hidden layer
 ]
 
 <br/>
-- <span style="color:#cccccc"> $\mathbf{z}^h(\mathbf{x}) = \mathbf{W}^h \mathbf{x} + \mathbf{b}^h$</span>
-- <span style="color:#cccccc"> $\mathbf{h}(\mathbf{x}) = g(\mathbf{z}^h(\mathbf{x})) = g(\mathbf{W}^h \mathbf{x} + \mathbf{b}^h)$</span>
-- <span style="color:#cccccc">$\mathbf{z}^o(\mathbf{x}) = \mathbf{W}^o \mathbf{h}(\mathbf{x}) + \mathbf{b}^o$</span>
-- $\mathbf{f}(\mathbf{x}) = softmax(\mathbf{z}^o) = softmax(\mathbf{W}^o \mathbf{h}(\mathbf{x}) + \mathbf{b}^o)$
-
-.credit[Slide credit: C. Ollion & O. Grisel]
-
----
-## Réseau à une couche cachée
-.center[<img src="images/neural_network_hidden_t.svg" style="width: 700px;" />]
-
-### Représentation alternative
-.center[<img src="images/flow_graph.svg" style="width: 500px;" /> ]
+- <span style="color:#cccccc"> $\mathbf{z}^h(\boldsymbol{x}) = \boldsymbol{W}^h \boldsymbol{x} + \mathbf{b}^h$</span>
+- <span style="color:#cccccc"> $\mathbf{h}(\boldsymbol{x}) = g(\mathbf{z}^h(\boldsymbol{x})) = g(\boldsymbol{W}^h \boldsymbol{x} + \mathbf{b}^h)$</span>
+- <span style="color:#cccccc">$\mathbf{z}^o(\boldsymbol{x}) = \boldsymbol{W}^o \mathbf{h}(\boldsymbol{x}) + \mathbf{b}^o$</span>
+- $\boldsymbol{f}(\boldsymbol{x}) = softmax(\mathbf{z}^o) = softmax(\boldsymbol{W}^o \mathbf{h}(\boldsymbol{x}) + \mathbf{b}^o)$
 
 .credit[Slide credit: C. Ollion & O. Grisel]
 
@@ -300,33 +310,36 @@ model = torch.nn.Sequential(
 
 ---
 ## Rappel - Notations
-- Un réseau de neurones correspond à une fonction f qui a des paramètres ajustables $W$:
+
+- Un réseau de neurones correspond à une fonction $f$ qui a des paramètres ajustables $W$:
 
 $$
-\mathbf{f}(\cdot; W): \mathbb{R}^N \rightarrow [0, 1]^K
+f( \boldsymbol{x} , W): \boldsymbol{x} \in \mathbb{R}^N \Longrightarrow f(\boldsymbol{x}) \in (0, 1)^K
 $$
 
-- Pour $s$ un élément du dataset $S$:
-  
-    - entrée: $\mathbf{x}^s \in \mathbb{R}^N$
-    - sortie attendue: $y^s \in [0, K-1]$
+- Un élément du dataset $S$ est composé de :
 
-- Probabilité: $\mathbf{f}(\mathbf{x}^s; W)_c = p(Y=c|X=\mathbf{x}^s)$
+    - une entrée : $\boldsymbol{x} \in \mathbb{R}^N$
+    - sortie attendue : $y \in [0, K-1]$
 
+- Probabilité que $\boldsymbol{x}$ appartient à la classe $c$ :
 
-.credit[Slide credit: C. Ollion & O. Grisel]
-
+$$
+f(\boldsymbol{x}; W)_c = p(Y=c|X=\boldsymbol{x})
+$$
 
 ---
 ## La Loss
 
 On définit une fonction de **loss** (perte) qui, pour un élément du dataset, évalue la qualité de la prédiction de notre réseau.
 
-Plus la valeur de la loss est basse pour un exemple donné, meilleure est la prédiction du réseau pour cet élément.
+On définit cette fonction de telle sorte que plus la valeur de la loss est basse pour un exemple donné, meilleure est la prédiction du réseau pour cet exemple.
 
-Pour un élément $(x, y)$ de S, on peut définir la fonction de loss $l$ comme: 
+--
+
+Pour un élément $(\boldsymbol{x}, y)$ de $S$, on peut définir la fonction de loss $l$ comme: 
 $$
-l(f(x, \theta), y) = - \log(f(x, \theta)_{y_c})
+l(\boldsymbol{f}(\boldsymbol{x}, \theta), y) = - \log(\boldsymbol{f}(\boldsymbol{x}, \theta)_{y_c})
 $$
 
 .center[
@@ -338,17 +351,17 @@ $$
 
 Pour un exemple donné, la loss vaut:
 $$
-l(\mathbf{f}(\mathbf{x}^s;\theta), y^s) = -\log \mathbf{f}(\mathbf{x}^s;\theta)\_{y^s}
+l(\boldsymbol{f}(\boldsymbol{x}\_s;\theta), y\_s) = -\log \boldsymbol{f}(\boldsymbol{x}\_s;\theta)\_{y\_s}
 $$
 
 
 On appelle fonction de coût la valeur moyenne de la loss calculée sur l'ensemble du dataset d'entraînement:
 
 $$
-L\_S(\theta) = - \frac{1}{|S|} \sum\_{s \in S} \log \mathbf{f}(\mathbf{x}^s;\theta)\_{y^s}
+L\_S(\theta) = - \frac{1}{|S|} \sum\_{s \in S} \log \boldsymbol{f}(\boldsymbol{x}\_s;\theta)\_{y\_s}
 $$
 
-Entraîner le réseau revient à trouver les valeurs des paramètres $\mathbf{\theta} = ( \mathbf{W}^h; \mathbf{b}^h; \mathbf{W}^o;
+Entraîner le réseau revient à trouver les valeurs des paramètres $\mathbf{\theta} = ( \boldsymbol{W}^h; \mathbf{b}^h; \boldsymbol{W}^o;
 \mathbf{b}^o )$ qui minimisent la fonction de coût.
 
 En pratique, pour chaque exemple du dataset S, on essaye de minimiser la fonction de loss associée.
@@ -372,51 +385,61 @@ On aime bien prendre la fonction log car elle simplifie les calculs dans la thé
 .center[<img src="images/gd_1.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_2.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_3.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_4.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_5.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_6.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_7.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_8.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_9.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_10.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_11.png" height="400px"/>]
@@ -430,56 +453,67 @@ On aime bien prendre la fonction log car elle simplifie les calculs dans la thé
 .center[<img src="images/gd_12.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_13.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_14.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_15.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_16.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_17.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_18.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_19.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_20.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_21.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_22.png" height="400px"/>]
 .credit[Slide credit: F. Fleuret]
 ---
+count:false
 ## Rappel - Descente de Gradient
 <br>
 .center[<img src="images/gd_23.png" height="400px"/>]
@@ -499,26 +533,27 @@ On aime bien prendre la fonction log car elle simplifie les calculs dans la thé
 
 ## Entraînement du réseau (SGD)
 
-### Initialiser tous les paramètres $\mathbf{\theta}$ aléatoirement
+- **Initialiser tous les paramètres $\mathbf{\theta}$ aléatoirement**
 
 --
 
-### Pour $k$ époques faire:
-
-- Sélectionner un élément $x_s$ du dataset S et calculer sa prédiction
-
+- **Répéter :**
 --
-- Calculer les gradients:
+
+    - Sélectionner un élément $x_s$ du dataset S et calculer sa prédiction
+--
+    - Calculer les gradients :
 $\Delta = \nabla_\theta L\(x_s, \theta)$
+--
+    
+    - Mettre à jour les paramètres : $\mathbf{\theta} \leftarrow \mathbf{\theta} - \eta \Delta$
+--
+
+- **S'arrêter lorsque la loss ne décroit plus sur l'ensemble de validation**
 
 --
-- Mettre à jour les paramètres: $\mathbf{\theta} \leftarrow \mathbf{\theta} - \eta \Delta$
 
---
-
-<br/>
-
-### S'arrêter lorsque la loss ne décroit plus sur l'ensemble de validation
+.center[[Go to CNN](cnn.html)]
 
 ---
 
