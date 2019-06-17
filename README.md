@@ -1,6 +1,7 @@
 # Introduction au Machine Learning et Deep Learning
+En ligne sur [theevann.github.io/ml-intro/](https://theevann.github.io/ml-intro/)
 
-## Présentation
+## Slides
 
 1. [Introduction](https://theevann.github.io/ml-intro/slides/intro.html)
 2. [Réseaux de Neurones](https://theevann.github.io/ml-intro/slides/nn.html)
