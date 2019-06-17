@@ -2,6 +2,10 @@
 
 ## Présentation
 
+1. [Introduction](slides/intro.html)
+2. [Réseaux de Neurones](slides/nn.html)
+3. [Réseaux de Neurones Convolutionnels](slides/cnn.html)
+4. [Limite et Ethique dans le Deep Learning](slides/ethique.html)
 
 ## TP
 Pour faire ces TP, vous pouvez utiliser *Google Colab* ou *Binder* comme plateforme de travail.  
