@@ -22,6 +22,16 @@ Pour faire ces TP, vous pouvez utiliser *Google Colab* ou *Binder* comme platefo
 
 ### Machines personnelles
 
-Vous pourrez par la suite aussi les faire marcher sur vos machines personnelles mais il faudra installer les packages pythons nécessaires.
+Vous pourrez par la suite aussi les faire marcher sur vos machines personnelles.
 
-`pip install -r requirements.txt`
+Il faudra cloner le repertoire github et installer les packages pythons nécessaires:
+
+```sh
+git clone https://github.com/theevann/ml-intro && cd ml-intro
+pip install -r requirements.txt
+```
+Vous pouvez ensuite lancer un notebook avec la commande:
+```sh
+jupyter notebook
+```
+
