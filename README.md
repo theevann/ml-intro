@@ -2,10 +2,10 @@
 
 ## Présentation
 
-1. [Introduction](slides/intro.html)
-2. [Réseaux de Neurones](slides/nn.html)
-3. [Réseaux de Neurones Convolutionnels](slides/cnn.html)
-4. [Limite et Ethique dans le Deep Learning](slides/ethique.html)
+1. [Introduction](https://theevann.github.io/ml-intro/slides/intro.html)
+2. [Réseaux de Neurones](https://theevann.github.io/ml-intro/slides/nn.html)
+3. [Réseaux de Neurones Convolutionnels](https://theevann.github.io/ml-intro/slides/cnn.html)
+4. [Limite et Ethique dans le Deep Learning](https://theevann.github.io/ml-intro/slides/ethique.html)
 
 ## TP
 Pour faire ces TP, vous pouvez utiliser *Google Colab* ou *Binder* comme plateforme de travail.  
